@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block nav %}
+    <a class="nav-link" href="{% url 'articles:create' %}">Добавить статью</a>
+{% endblock %}
+{% block content %}
+    <div class="card my-5">
+        <div class="card-header fs-4 text-center">{{ article.title }}</div>
+        <div class="card-body">
+            <figure>
+                <blockquote class="blockquote">
+                    <p>{{ article.content }}</p>
+                </blockquote>
+                <p>Статус: {{ article.get_status_display }}</p>
+                <figcaption class="blockquote-footer mt-3">
+                    Автор: {{ article.author }}
+                </figcaption>
+                <p>Блог: {% if article.blog %}{{ article.blog.title }}{% else %}---{% endif %}</p>
+                <p>Теги: {% for tag in article.tags.all %}{{ tag }} {% endfor %}</p>
+            </figure>
+        </div>
+        <div class="text-end me-3 mb-3">
+            <a href="{% url 'articles:update' article.pk %}" class="btn btn-outline-warning">
+                <span>Изменить</span><i class="fa-regular fa-pen-to-square ms-2"></i>
+            </a>
+            <a href="{% url 'articles:delete' article.pk %}" class="btn btn-outline-danger">
+                <i class="fa-regular fa-trash-can"></i>
+            </a>
+{#            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#article-{{ article.pk }}-Modal">#}
+{#                <span>Удалить</span><i class="fa-regular fa-trash-can ms-2"></i>#}
+{#            </button>#}
+        </div>
+    </div>
+        <div class="card my-5">
+        <div class="card-header">
+            Комментарии
+        </div>
+        <div class="card-body">
+            {% for comment in article.comments.all %}
+                <p>{{ forloop.counter }}. {{ comment }}</p>
+                {% empty %}
+                <p>Комментариев нет</p>
+            {% endfor %}
+        </div>
+        <div class="text-end me-3 mb-3">
+            <a href="{% url 'articles:comment-create' article.pk %}" class="btn btn-outline-warning">
+                <span>Добавить</span>
+            </a>
+        </div>
+    </div>
+    {% include 'partial/article_delete_modal.html' with article=article %}
+
+{% endblock %}

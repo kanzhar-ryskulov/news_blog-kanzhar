@@ -1,0 +1,135 @@
+[
+{
+    "model": "articles.blog",
+    "pk": 1,
+    "fields": {
+        "title": "blog 1",
+        "content": "content 1"
+    }
+},
+{
+    "model": "articles.blog",
+    "pk": 2,
+    "fields": {
+        "title": "blog 2",
+        "content": "content 2"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 1,
+    "fields": {
+        "title": "Статья 1",
+        "content": "Описание 1",
+        "author": "Автор 1",
+        "created_at": "2026-05-21T13:39:08.486Z",
+        "updated_at": "2026-05-28T13:22:33.061Z",
+        "status": "moderated",
+        "blog": null
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 2,
+    "fields": {
+        "title": "Статья 2",
+        "content": "Описание 2",
+        "author": "Автор 2",
+        "created_at": "2026-05-21T13:39:24.568Z",
+        "updated_at": "2026-05-28T13:22:33.063Z",
+        "status": "moderated",
+        "blog": null
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 3,
+    "fields": {
+        "title": "Статья 3",
+        "content": "Описание 3",
+        "author": "Автор 3",
+        "created_at": "2026-05-21T14:03:05.347Z",
+        "updated_at": "2026-05-28T13:22:33.063Z",
+        "status": "moderated",
+        "blog": null
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 4,
+    "fields": {
+        "title": "Статья 4",
+        "content": null,
+        "author": "Автор 1",
+        "created_at": "2026-05-21T14:22:00.846Z",
+        "updated_at": "2026-05-28T13:22:33.064Z",
+        "status": "moderated",
+        "blog": null
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 5,
+    "fields": {
+        "title": "Статья 5",
+        "content": "Описание 5",
+        "author": "",
+        "created_at": "2026-05-21T14:23:26.182Z",
+        "updated_at": "2026-05-21T14:26:20.298Z",
+        "status": "new",
+        "blog": null
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 6,
+    "fields": {
+        "title": "статья 6",
+        "content": "описание 6",
+        "author": "Автор 1",
+        "created_at": "2026-05-21T14:28:20.451Z",
+        "updated_at": "2026-05-28T13:22:33.064Z",
+        "status": "moderated",
+        "blog": null
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 7,
+    "fields": {
+        "title": "статья 7",
+        "content": "описание 7",
+        "author": "Автор 1",
+        "created_at": "2026-05-21T14:30:13.558Z",
+        "updated_at": "2026-05-28T13:22:33.064Z",
+        "status": "moderated",
+        "blog": null
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 8,
+    "fields": {
+        "title": "статья 8",
+        "content": "описание 8",
+        "author": "Автор 2",
+        "created_at": "2026-05-21T14:30:17.644Z",
+        "updated_at": "2026-05-28T13:22:33.064Z",
+        "status": "moderated",
+        "blog": null
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 27,
+    "fields": {
+        "title": "Статья 9",
+        "content": "Описание 9",
+        "author": "Автор 2",
+        "created_at": "2026-06-03T09:49:29.678Z",
+        "updated_at": "2026-06-03T09:49:29.678Z",
+        "status": "new",
+        "blog": null
+    }
+}
+]
