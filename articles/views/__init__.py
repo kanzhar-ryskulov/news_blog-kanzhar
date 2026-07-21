@@ -5,3 +5,9 @@ from articles.views.articles import ArticleUpdateView
 from articles.views.articles import ArticleDeleteView
 
 from articles.views.comments import CommentCreateView
+from articles.views.likes import (
+    ArticleLikeView,
+    ArticleUnlikeView,
+    CommentLikeView,
+    CommentUnlikeView,
+)

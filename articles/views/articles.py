@@ -8,7 +8,7 @@ from django.views import View
 from django.views.generic import FormView, ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from articles.forms import ArticleForm, SimpleSearchForm, ArticleDeleteForm
-from articles.models import Article
+from articles.models import Article, annotate_likes
 
 
 class ArticleListView(ListView):
@@ -39,6 +39,7 @@ class ArticleListView(ListView):
             queryset = queryset.filter(
                 Q(title__icontains=self.search_value) | Q(author__icontains=self.search_value)
             )
+        queryset = annotate_likes(queryset, self.request.user)
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -56,9 +57,13 @@ class ArticleDetailView(DetailView):
     template_name = "articles/article_view.html"
     model = Article
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return annotate_likes(queryset, self.request.user)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['comments'] = self.object.comments.all()
+        context['comments'] = annotate_likes(self.object.comments.all(), self.request.user)
         return context
 
 
@@ -92,8 +97,3 @@ class ArticleDeleteView(DeleteView):
         if self.request.method == 'POST':
             kwargs['instance'] = self.object
         return kwargs
-
-    # def post(self, request, *args, **kwargs):
-    #     article = get_object_or_404(Article, pk=self.kwargs.get('pk'))
-    #     article.delete()
-    #     return redirect("list")

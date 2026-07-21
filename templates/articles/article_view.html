@@ -14,20 +14,27 @@
                 <figcaption class="blockquote-footer mt-3">
                     Автор: {{ article.author }}
                 </figcaption>
-                <p>Блог: {% if article.blog %}{{ article.blog.title }}{% else %}---{% endif %}</p>
                 <p>Теги: {% for tag in article.tags.all %}{{ tag }} {% endfor %}</p>
             </figure>
         </div>
         <div class="text-end me-3 mb-3">
+            {% if request.user.is_authenticated %}
+                <button type="button"
+                        class="btn btn-outline-primary like-button"
+                        data-type="article"
+                        data-id="{{ article.pk }}"
+                        data-liked="{{ article.is_liked|yesno:'1,0' }}">
+                    <i class="like-icon {% if article.is_liked %}fa-solid{% else %}fa-regular{% endif %} fa-heart"></i>
+                    <span class="like-text">{% if article.is_liked %}Анлайк{% else %}Лайк{% endif %}</span>
+                    (<span class="like-count">{{ article.likes_count }}</span>)
+                </button>
+            {% endif %}
             <a href="{% url 'articles:update' article.pk %}" class="btn btn-outline-warning">
                 <span>Изменить</span><i class="fa-regular fa-pen-to-square ms-2"></i>
             </a>
             <a href="{% url 'articles:delete' article.pk %}" class="btn btn-outline-danger">
                 <i class="fa-regular fa-trash-can"></i>
             </a>
-{#            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#article-{{ article.pk }}-Modal">#}
-{#                <span>Удалить</span><i class="fa-regular fa-trash-can ms-2"></i>#}
-{#            </button>#}
         </div>
     </div>
         <div class="card my-5">
@@ -35,8 +42,21 @@
             Комментарии
         </div>
         <div class="card-body">
-            {% for comment in article.comments.all %}
-                <p>{{ forloop.counter }}. {{ comment }}</p>
+            {% for comment in comments %}
+                <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+                    <p class="mb-0">{{ forloop.counter }}. {{ comment }}</p>
+                    {% if request.user.is_authenticated %}
+                        <button type="button"
+                                class="btn btn-sm btn-outline-primary like-button"
+                                data-type="comment"
+                                data-id="{{ comment.pk }}"
+                                data-liked="{{ comment.is_liked|yesno:'1,0' }}">
+                            <i class="like-icon {% if comment.is_liked %}fa-solid{% else %}fa-regular{% endif %} fa-heart"></i>
+                            <span class="like-text">{% if comment.is_liked %}Анлайк{% else %}Лайк{% endif %}</span>
+                            (<span class="like-count">{{ comment.likes_count }}</span>)
+                        </button>
+                    {% endif %}
+                </div>
                 {% empty %}
                 <p>Комментариев нет</p>
             {% endfor %}
