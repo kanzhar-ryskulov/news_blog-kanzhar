@@ -90,3 +90,32 @@ def multiply(request):
         )
 
 
+
+@csrf_exempt
+def divide(request):
+    if request.method != "POST":
+        return JsonResponse({'error': 'Method Not Allowed'}, status=405)
+
+    try :
+        data = json.loads(request.body)
+        a = data['A']
+        b = data['B']
+
+        if not isinstance(a, (int, float)) or not isinstance(b, (int, float)):
+            raise ValueError
+        if b == 0:
+            return JsonResponse(
+                {"error": "Division by zero!"},
+                status=400
+            )
+
+        return JsonResponse({
+            "answer": a / b
+        })
+    except ValueError:
+        return JsonResponse(
+            {
+                "error": "Invalid data"
+            }
+            , status=400
+        )
