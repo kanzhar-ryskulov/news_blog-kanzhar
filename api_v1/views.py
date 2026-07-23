@@ -64,3 +64,29 @@ def subtract(request):
             , status=400
         )
 
+
+@csrf_exempt
+def multiply(request):
+    if request.method != "POST":
+        return JsonResponse({'error': 'Method Not Allowed'}, status=405)
+
+    try :
+        data = json.loads(request.body)
+        a = data['A']
+        b = data['B']
+
+        if not isinstance(a, (int, float)) or not isinstance(b, (int, float)):
+            raise ValueError
+
+        return JsonResponse({
+            "answer": a * b
+        })
+    except ValueError:
+        return JsonResponse(
+            {
+                "error": "Invalid data"
+            }
+            , status=400
+        )
+
+
